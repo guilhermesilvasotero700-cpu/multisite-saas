@@ -20,6 +20,9 @@ export default function AdminPage() {
   const [politica, setPolitica] = useState("");
   const [rodape, setRodape] = useState("");
 
+  const [cidade, setCidade] = useState("");
+  const [estado, setEstado] = useState("");
+
   const [slogan, setSlogan] = useState("");
 
   const [seoTitle, setSeoTitle] = useState("");
@@ -103,6 +106,12 @@ export default function AdminPage() {
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
 
+      const cidadeEmpresa =
+        data.municipio || "";
+
+      const estadoEmpresa =
+        data.uf || "";
+
       setNome(nomeEmpresa);
 
       setDominio(dominioGerado);
@@ -110,6 +119,10 @@ export default function AdminPage() {
       setWhatsapp(
         data.ddd_telefone_1 || ""
       );
+
+      setCidade(cidadeEmpresa);
+
+      setEstado(estadoEmpresa);
 
       setEmail(
         `contato@${dominioGerado}.com`
@@ -124,35 +137,35 @@ export default function AdminPage() {
       );
 
       setSlogan(
-        `${fantasia} - excelência e inovação para seu negócio`
+        `${fantasia} transformando negócios com excelência e inovação.`
       );
 
       setMissao(`
-A missão da ${nomeEmpresa} é atuar com excelência em seu segmento.
+A missão da ${nomeEmpresa} é oferecer soluções profissionais com excelência, transparência e compromisso com resultados consistentes para seus clientes em ${cidadeEmpresa}/${estadoEmpresa}.
       `);
 
       setSobreNos(`
-A ${nomeEmpresa} atua oferecendo soluções profissionais e atendimento de qualidade.
+A ${nomeEmpresa} atua no mercado oferecendo soluções profissionais e atendimento especializado. Localizada em ${cidadeEmpresa}/${estadoEmpresa}, a empresa busca excelência, inovação e qualidade em todos os seus serviços.
       `);
 
       setPolitica(`
-Política de privacidade da ${nomeEmpresa}.
+Política de privacidade da ${nomeEmpresa}. Todas as informações são tratadas com segurança, responsabilidade e respeito à privacidade dos usuários.
       `);
 
       setRodape(`
-${nomeEmpresa} © Todos os direitos reservados.
+${nomeEmpresa} • CNPJ ${cnpj} • ${cidadeEmpresa}/${estadoEmpresa} • Todos os direitos reservados.
       `);
 
       setSeoTitle(
-        `${fantasia} | Empresa Profissional`
+        `${fantasia} | Empresa Profissional em ${cidadeEmpresa}`
       );
 
       setSeoDescription(
-        `${fantasia} oferece soluções profissionais com excelência, inovação e atendimento de qualidade.`
+        `${fantasia} oferece soluções profissionais em ${cidadeEmpresa}/${estadoEmpresa} com excelência, inovação e atendimento especializado.`
       );
 
       setKeywords(
-        `${fantasia}, empresa, serviços, soluções, atendimento`
+        `${fantasia}, ${cidadeEmpresa}, ${estadoEmpresa}, empresa, soluções, atendimento`
       );
 
       setMetatag(
@@ -185,6 +198,8 @@ ${nomeEmpresa} © Todos os direitos reservados.
           slogan,
           logo,
           banner,
+          cidade,
+          estado,
           seo_title: seoTitle,
           seo_description: seoDescription,
           keywords,
@@ -235,22 +250,18 @@ ${nomeEmpresa} © Todos os direitos reservados.
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4">
+          <div>
+            <label className="block mb-2 font-bold">
+              Upload Banner
+            </label>
 
-            <div>
-              <label className="block mb-2 font-bold">
-                Upload Banner
-              </label>
-
-              <input
-                type="file"
-                onChange={(e) =>
-                  uploadImagem(e, "banner")
-                }
-                className="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-4"
-              />
-            </div>
-
+            <input
+              type="file"
+              onChange={(e) =>
+                uploadImagem(e, "banner")
+              }
+              className="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-4"
+            />
           </div>
 
           <input
